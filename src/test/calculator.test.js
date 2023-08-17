@@ -31,6 +31,13 @@ describe('Calculator', () => {
 		expect(cal.value).toBe(10);
 	});
 
+	it('adds should throw an error if value is greater then 100', () => {
+		// 에러를 예상하는 코드
+		expect(() => {
+			cal.add(101);
+		}).toThrow('Value can not be greater than 100');
+	});
+
 	it('substracts', () => {
 		cal.set(15);
 		cal.substract(5);
@@ -61,7 +68,5 @@ describe('Calculator', () => {
 			cal.divide(4);
 			expect(cal.value).toBe(1);
 		});
-
-
 	});
 });
