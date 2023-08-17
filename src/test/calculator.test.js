@@ -1,57 +1,67 @@
 const Calculator = require('../calculator.js');
 
 // describe -> test그룹 나누기
-describe('Caculator', () => {
-	let calculator;
+describe('Calculator', () => {
+	let cal;
 
-  //beforeEach -> test케이스 실행 전에 Calculator인스턴스 초기화 역할
+	//beforeEach -> test케이스 실행 전에 Calculator인스턴스 초기화 역할
 	beforeEach(() => {
-		calculator = new Calculator();
+		cal = new Calculator();
 	});
 
-	test('set initial value to 0', () => {
-		expect(calculator.value).toBe(0);
+	// it은 Calculator를 가르키는 3인칭 주어
+	it('inits with 0', () => {
+		expect(cal.value).toBe(0);
 	});
 
-	test('set value correctly', () => {
-		calculator.set(5);
-		expect(calculator.value).toBe(5);
+	it('sets', () => {
+		cal.set(5);
+		expect(cal.value).toBe(5);
 	});
 
-	test('clear value', () => {
-		calculator.set(10);
-		calculator.clear();
-		expect(calculator.value).toBe(0);
+	it('clear', () => {
+		cal.set(10);
+		cal.clear();
+		expect(cal.value).toBe(0);
 	});
 
-	test('add numbers', () => {
-		calculator.set(7);
-		calculator.add(3);
-		expect(calculator.value).toBe(10);
+	it('adds', () => {
+		cal.set(7);
+		cal.add(3);
+		expect(cal.value).toBe(10);
 	});
 
-	test('substract numbers', () => {
-		calculator.set(15);
-		calculator.substract(5);
-		expect(calculator.value).toBe(10);
+	it('substracts', () => {
+		cal.set(15);
+		cal.substract(5);
+		expect(cal.value).toBe(10);
 	});
 
-  test('multiply numbers', () => {
-		calculator.set(4);
-		calculator.multiply(3);
-		expect(calculator.value).toBe(12);
+	it('multiplies', () => {
+		cal.set(4);
+		cal.multiply(3);
+		expect(cal.value).toBe(12);
 	});
 
-  test('divide numbers', () => {
-		calculator.set(20);
-		calculator.divide(4);
-		expect(calculator.value).toBe(5);
-	});
+	// 나누는 것은 까다롭기 때문에 그룹으로 묶어서 test
+	describe('divides', () => {
+		it('0 / 0 === NaN ', () => {
+			cal.divide(0);
+			expect(cal.value).toBe(NaN);
+		});
 
-  // divide 메서드가 0으로 나누기를 처리하는지 테스트
-  test('division by zero', () => {
-    calculator.set(10);
-    calculator.divide(0);
-    expect(calculator.value).toBe(Infinity);
-  });
+		it('1 / 0 === Infinity ', () => {
+			cal.set(1);
+			cal.divide(0);
+			expect(cal.value).toBe(Infinity);
+		});
+
+		it('4 / 4 === 1 ', () => {
+			cal.set(4);
+			cal.divide(4);
+			expect(cal.value).toBe(1);
+		});
+
+
+	});
 });
